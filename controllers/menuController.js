@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Menu from '../models/menu';
 
 export const createMenu = async (req, res) => {
@@ -9,6 +8,15 @@ export const createMenu = async (req, res) => {
 
     await newMenu.save();
     res.status(200).send(newMenu);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export const listMenus = async (req, res) => {
+  try {
+    const allMenus = await Menu.find({});
+    res.status(200).send(allMenus);
   } catch (error) {
     res.status(500).send(error.message);
   }
